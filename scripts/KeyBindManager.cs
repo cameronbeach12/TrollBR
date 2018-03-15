@@ -8,22 +8,31 @@ public class KeyBindManager : MonoBehaviour {
 
 	// Use this for initialization
 	public IEnumerator SetMoveForward(bool keyPressed){
-			while (!Input.anyKeyDown && keyPressed == false) {
-				if (Input.anyKeyDown) {
-					foreach (KeyCode vKey in System.Enum.GetValues(typeof(KeyCode))) {
-						if (Input.GetKey (vKey)) {
-							string nKey = vKey.ToString ();
-							PlayerPrefs.SetString (MOVE_FORWARD_KEY, nKey);
-							keyPressed = true;
-							yield break;
+		while (keyPressed == false) {
+			Debug.Log ("I'm Here");
+			if(Input.anyKeyDown){
+				Debug.Log ("icecream");
+				foreach (KeyCode vKey in System.Enum.GetValues(typeof(KeyCode))) {
+					if (Input.GetKeyDown (vKey)) {
+						string nKey = vKey.ToString ();
+						PlayerPrefs.SetString (MOVE_FORWARD_KEY, nKey);
+						keyPressed = true;
+						yield break;
 					}
 				} 
-
+			}if (keyPressed == false) {
+				yield return null;
 			}
 		}
 	}
 
+
+	public static string GetMoveForward(){
+		return PlayerPrefs.GetString(MOVE_FORWARD_KEY);
+	}
+
 	public void SetMF(){
+		Debug.Log (GetMoveForward());
 		StartCoroutine (SetMoveForward (false));
 	}
 }
