@@ -127,31 +127,9 @@ public class KeyBindManager : MonoBehaviour {
 		}
 	}
 		
-	public IEnumerator SetFire(bool MousePressed){
-		while (MousePressed == false) {
-			Debug.Log ("I'm Here");
-			if (Input.GetMouseButtonDown (0) || Input.GetMouseButtonDown (1) || Input.GetMouseButtonDown (2)) {
-				if (Input.GetMouseButtonDown (0)) {
-					PlayerPrefs.SetString (FIRE_KEY, "Left Mouse Button");
-					MousePressed = true;
-					yield break;
-				} else if (Input.GetMouseButtonDown (1)) {
-					PlayerPrefs.SetString (FIRE_KEY, "Right Mouse Button");
-					MousePressed = true;
-					yield break;
-				} 
-				} else if (Input.GetMouseButtonDown (2)) {
-					PlayerPrefs.SetString (FIRE_KEY, "Middle Mouse Button");
-					MousePressed = true;
-					yield break;
-				} else {
-				Debug.LogError ("Unknown Mouse Key!");
-				}
-			}
-			if (MousePressed == false) {
-				yield return null;
-			}
-		}
+	public void SetFire(){
+		PlayerPrefs.SetString(FIRE_KEY,"Left Mouse Button")
+	}
 
 	public static string GetMoveForward(){
 		return PlayerPrefs.GetString(MOVE_FORWARD_KEY);
@@ -209,11 +187,6 @@ public class KeyBindManager : MonoBehaviour {
 	public void SetSprint(){
 		Debug.Log (GetSprint());
 		StartCoroutine (SetSprint(false));
-	}
-
-	public void SetFire(){
-		Debug.Log (GetSprint());
-		StartCoroutine (SetFire(false));
 	}
 
 	public void SetDefaults(){
