@@ -10,6 +10,7 @@ public class KeyBindManager : MonoBehaviour {
 	const string MOVE_RIGHT_KEY = "move_right";
 	const string JUMP_KEY = "jump";
 	const string SPRINT_KEY = "sprint";
+	const string FIRE_KEY = "fire";
 
 	// Use this for initialization
 	public IEnumerator SetMoveForward(bool keyPressed){
@@ -125,6 +126,32 @@ public class KeyBindManager : MonoBehaviour {
 			}
 		}
 	}
+		
+	public IEnumerator SetFire(bool MousePressed){
+		while (MousePressed == false) {
+			Debug.Log ("I'm Here");
+			if (Input.GetMouseButtonDown (0) || Input.GetMouseButtonDown (1) || Input.GetMouseButtonDown (2)) {
+				if (Input.GetMouseButtonDown (0)) {
+					PlayerPrefs.SetString (FIRE_KEY, "Left Mouse Button");
+					MousePressed = true;
+					yield break;
+				} else if (Input.GetMouseButtonDown (1)) {
+					PlayerPrefs.SetString (FIRE_KEY, "Right Mouse Button");
+					MousePressed = true;
+					yield break;
+				} 
+				} else if (Input.GetMouseButtonDown (2)) {
+					PlayerPrefs.SetString (FIRE_KEY, "Middle Mouse Button");
+					MousePressed = true;
+					yield break;
+				} else {
+				Debug.LogError ("Unknown Mouse Key!");
+				}
+			}
+			if (MousePressed == false) {
+				yield return null;
+			}
+		}
 
 	public static string GetMoveForward(){
 		return PlayerPrefs.GetString(MOVE_FORWARD_KEY);
@@ -148,6 +175,10 @@ public class KeyBindManager : MonoBehaviour {
 
 	public static string GetSprint(){
 		return PlayerPrefs.GetString(SPRINT_KEY);
+	}
+
+	public static string GetFire(){
+		return PlayerPrefs.GetString(FIRE_KEY);
 	}
 
 	public void SetMF(){
@@ -180,6 +211,11 @@ public class KeyBindManager : MonoBehaviour {
 		StartCoroutine (SetSprint(false));
 	}
 
+	public void SetFire(){
+		Debug.Log (GetSprint());
+		StartCoroutine (SetFire(false));
+	}
+
 	public void SetDefaults(){
 		PlayerPrefs.SetString (MOVE_FORWARD_KEY, "W");
 		PlayerPrefs.SetString (MOVE_LEFT_KEY, "A");
@@ -187,5 +223,6 @@ public class KeyBindManager : MonoBehaviour {
 		PlayerPrefs.SetString(MOVE_RIGHT_KEY,"D");
 		PlayerPrefs.SetString(JUMP_KEY,"Space");
 		PlayerPrefs.SetString(SPRINT_KEY,"LeftShift");
+		PlayerPrefs.SetString(FIRE_KEY,"Left Mouse Button");
 	}
 }

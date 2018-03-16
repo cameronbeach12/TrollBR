@@ -11,6 +11,7 @@ public class ControlsTextController : MonoBehaviour {
 	public Text MRText;
 	public Text JumpText;
 	public Text SprintText;
+	public Text FireText;
 
 	// Use this for initialization
 	void Start () {
@@ -20,6 +21,7 @@ public class ControlsTextController : MonoBehaviour {
 		MRText.text = KeyBindManager.GetMoveRight ();
 		JumpText.text = KeyBindManager.GetJump ();
 		SprintText.text = KeyBindManager.GetSprint ();
+		FireText.text = KeyBindManager.GetFire ();
 	}
 	
 	// Update is called once per frame
@@ -30,5 +32,6 @@ public class ControlsTextController : MonoBehaviour {
 		MRText.text = KeyBindManager.GetMoveRight ();
 		JumpText.text = KeyBindManager.GetJump ();
 		SprintText.text = KeyBindManager.GetSprint ();
+		FireText.text = KeyBindManager.GetFire ();
 	}
 }
